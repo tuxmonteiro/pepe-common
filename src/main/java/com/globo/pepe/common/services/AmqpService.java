@@ -17,6 +17,8 @@
 package com.globo.pepe.common.services;
 
 import com.globo.pepe.common.services.JsonLoggerService.JsonLogger;
+import java.util.Collections;
+import java.util.Set;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -121,6 +123,11 @@ public class AmqpService {
         final List<MessageListener> listOfMessageListener = messageListeners.get(queueName);
         listOfMessageListener.add(newMessageListener);
         messageListeners.put(queueName, listOfMessageListener);
+    }
+
+    public Set<String> queuesFromRabbit(String prefix) {
+        // TODO: Get from RabbitAdmin
+        return Collections.emptySet();
     }
 
 }
