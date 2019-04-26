@@ -16,7 +16,6 @@
 
 package com.globo.pepe.common.services;
 
-import com.globo.pepe.common.services.JsonLoggerService.JsonLogger;
 import java.util.Collections;
 import java.util.Set;
 import org.springframework.amqp.core.MessageListener;
@@ -38,17 +37,17 @@ public class AmqpService {
     private final RabbitTemplate template;
     private final RabbitAdmin admin;
     private final ConnectionFactory connectionFactory;
-    private final JsonLogger logger;
 
     private final Map<String, SimpleMessageListenerContainer> messageListenerContainerMap = new HashMap<>();
     private final Map<String, List<MessageListener>> messageListeners = new HashMap<>();
+    private final JsonLoggerService jsonLoggerService;
 
     public AmqpService(ConnectionFactory connectionFactory, RabbitTemplate template, RabbitAdmin admin,
         JsonLoggerService jsonLoggerService) {
         this.connectionFactory = connectionFactory;
         this.template = template;
         this.admin = admin;
-        this.logger = jsonLoggerService.newLogger(getClass());
+        this.jsonLoggerService = jsonLoggerService;
     }
 
     public ConnectionFactory connectionFactory() {
@@ -78,14 +77,16 @@ public class AmqpService {
             return false;
         }
         final Queue queue = new Queue(queueName);
-        logger.put("message", "Queue " + queueName + " created.").sendInfo();
+        jsonLoggerService.newLogger(getClass()).put("message", "Queue " + queueName + " created.").sendInfo();
         return admin.declareQueue(queue) != null;
     }
 
     private MessageListener messageListener(String queueName) {
         return message -> {
             if (messageListeners.get(queueName).isEmpty()) {
-                logger.put("message", "Discarding queue message: " + message + ". Queue " + queueName + " dont have listeners registered.").sendWarn();
+                jsonLoggerService.newLogger(getClass())
+                    .put("message", "Discarding queue message: " + message + ". Queue " + queueName + " dont have listeners registered.")
+                    .sendWarn();
             }
             for (MessageListener messageListener: messageListeners.get(queueName)) {
                 messageListener.onMessage(message);

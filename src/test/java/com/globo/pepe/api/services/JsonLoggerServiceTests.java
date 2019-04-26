@@ -46,12 +46,6 @@ public class JsonLoggerServiceTests {
 
     @Autowired
     private JsonLoggerService jsonLoggerService;
-    private JsonLogger logger;
-
-    @Before
-    public void setup() {
-        this.logger = jsonLoggerService.newLogger(getClass());
-    }
 
     @Test
     public void newJsonLoggerTest() {
@@ -61,14 +55,14 @@ public class JsonLoggerServiceTests {
     @Test
     public void sendDebugDisabledTest() {
         Configurator.setLevel(getClass().getPackage().getName(), Level.INFO);
-        String logStr = logger.put("test", "value").sendDebug();
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendDebug();
         assertNull(logStr);
     }
 
     @Test
     public void sendDebugEnabledTest() {
         Configurator.setLevel(getClass().getPackage().getName(), Level.DEBUG);
-        String logStr = logger.put("test", "value").sendDebug();
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendDebug();
         Configurator.setLevel(getClass().getPackage().getName(), Level.INFO);
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("default", JsonPath.parse(logStr).read("$.tags"));
@@ -79,7 +73,7 @@ public class JsonLoggerServiceTests {
     public void sendDebugDisabledWithThrowableTest() {
         Configurator.setLevel(getClass().getPackage().getName(), Level.INFO);
         Throwable throwable = new RuntimeException("debug");
-        String logStr = logger.put("test", "value").sendDebug(throwable);
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendDebug(throwable);
         assertNull(logStr);
     }
 
@@ -87,7 +81,7 @@ public class JsonLoggerServiceTests {
     public void sendDebugEnabledWithThrowableTest() {
         Throwable throwable = new RuntimeException("debug");
         Configurator.setLevel(getClass().getPackage().getName(), Level.DEBUG);
-        String logStr = logger.put("test", "value").sendDebug(throwable);
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendDebug(throwable);
         Configurator.setLevel(getClass().getPackage().getName(), Level.INFO);
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("debug", JsonPath.parse(logStr).read("$.throwable_message"));
@@ -98,7 +92,7 @@ public class JsonLoggerServiceTests {
 
     @Test
     public void sendInfoTest() {
-        String logStr = logger.put("test", "value").sendInfo();
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendInfo();
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("default", JsonPath.parse(logStr).read("$.tags"));
         assertEquals("value", JsonPath.parse(logStr).read("$.test"));
@@ -107,7 +101,7 @@ public class JsonLoggerServiceTests {
     @Test
     public void sendInfoWithThrowableTest() {
         Throwable throwable = new RuntimeException("info");
-        String logStr = logger.put("test", "value").sendInfo(throwable);
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendInfo(throwable);
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("info", JsonPath.parse(logStr).read("$.throwable_message"));
         assertEquals("sendInfoWithThrowableTest", JsonPath.parse(logStr).read("$.throwable_stack.stackTrace[0].methodName"));
@@ -117,7 +111,7 @@ public class JsonLoggerServiceTests {
 
     @Test
     public void sendWarnTest() {
-        String logStr = logger.put("test", "value").sendWarn();
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendWarn();
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("default", JsonPath.parse(logStr).read("$.tags"));
         assertEquals("value", JsonPath.parse(logStr).read("$.test"));
@@ -126,7 +120,7 @@ public class JsonLoggerServiceTests {
     @Test
     public void sendWarnWithThrowableTest() {
         Throwable throwable = new RuntimeException("warn");
-        String logStr = logger.put("test", "value").sendWarn(throwable);
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendWarn(throwable);
         System.out.println(logStr);
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("warn", JsonPath.parse(logStr).read("$.throwable_message"));
@@ -138,7 +132,7 @@ public class JsonLoggerServiceTests {
     @Test
     public void sendErrorTest() {
         Throwable throwable = new RuntimeException("error");
-        String logStr = logger.put("test", "value").sendError(throwable);
+        String logStr = jsonLoggerService.newLogger(getClass()).put("test", "value").sendError(throwable);
         assertEquals(getClass().getSimpleName(), JsonPath.parse(logStr).read("$.class"));
         assertEquals("error", JsonPath.parse(logStr).read("$.throwable_message"));
         assertEquals("sendErrorTest", JsonPath.parse(logStr).read("$.throwable_stack.stackTrace[0].methodName"));
