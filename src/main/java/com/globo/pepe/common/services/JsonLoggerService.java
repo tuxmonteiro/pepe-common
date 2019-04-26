@@ -19,7 +19,10 @@ package com.globo.pepe.common.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.Instant;
+import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +52,13 @@ public class JsonLoggerService {
         public JsonLogger(final Class<?> klazz) {
             this.logger = LogManager.getLogger(klazz);
             node.put("class", klazz.getSimpleName());
-            node.put("host", System.getenv("HOSTNAME"));
+            String hostname;
+            try {
+                hostname = Optional.ofNullable(System.getenv("HOSTNAME")).orElse(InetAddress.getLocalHost().getCanonicalHostName());
+            } catch (UnknownHostException e) {
+                hostname = "UnknownHost";
+            }
+            node.put("host", hostname);
             node.put("tags", loggingTags);
             node.put("timestamp", Instant.now().getEpochSecond());
         }
