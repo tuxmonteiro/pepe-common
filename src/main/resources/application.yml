@@ -1,0 +1,14 @@
+build:
+  project: '@project.artifactId@'
+  timestamp: '@timestamp@'
+  version: '@project.version@'
+
+pepe:
+  logging:
+    tags: ${LOGGING_TAGS:default}
+
+amqp:
+  url: ${RABBIT_URL:amqp://guest:guest@127.0.0.1}
+
+server:
+  port: ${PORT:8000}

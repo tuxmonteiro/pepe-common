@@ -1,0 +1,11 @@
+build:
+  project: '@project.artifactId@'
+  timestamp: '@timestamp@'
+  version: '@project.version@'
+
+pepe:
+  logging:
+    tags: default
+
+amqp:
+  url: amqp://guest:guest@127.0.0.1
