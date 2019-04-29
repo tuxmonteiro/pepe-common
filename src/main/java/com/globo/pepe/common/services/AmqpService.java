@@ -50,6 +50,14 @@ public class AmqpService {
         this.jsonLoggerService = jsonLoggerService;
     }
 
+    public boolean hasQueue(String queue) {
+        return messageListeners.containsKey(queue);
+    }
+
+    public Set<String> queuesRegistered() {
+        return messageListeners.keySet();
+    }
+
     public ConnectionFactory connectionFactory() {
         return connectionFactory;
     }
