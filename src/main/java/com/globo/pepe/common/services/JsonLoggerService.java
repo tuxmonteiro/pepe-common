@@ -68,6 +68,14 @@ public class JsonLoggerService {
             node.set("throwable_stack", mapper.convertValue(throwable, JsonNode.class));
         }
 
+        public JsonLogger message(String value) {
+            return put("short_message", value);
+        }
+
+        public boolean isDebugEnabled() {
+            return logger.isDebugEnabled();
+        }
+
         public JsonLogger put(String key, String value) {
             node.put(key, value);
             return this;
