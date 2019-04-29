@@ -1,0 +1,115 @@
+[{
+  "arguments": {},
+  "auto_delete": false,
+  "backing_queue_status": {
+    "avg_ack_egress_rate": 0,
+    "avg_ack_ingress_rate": 4.118733677202692e-210,
+    "avg_egress_rate": 0.02790311120945613,
+    "avg_ingress_rate": 0.1762269496922001,
+    "delta": [
+      "delta",
+      "undefined",
+      0,
+      0,
+      "undefined"
+    ],
+    "len": 0,
+    "mirror_seen": 0,
+    "mirror_senders": 1,
+    "mode": "default",
+    "next_seq_id": 24,
+    "q1": 0,
+    "q2": 0,
+    "q3": 0,
+    "q4": 0,
+    "target_ram_count": "infinity"
+  },
+  "consumer_utilisation": null,
+  "consumers": 0,
+  "durable": true,
+  "effective_policy_definition": {
+    "ha-mode": "all"
+  },
+  "exclusive": false,
+  "exclusive_consumer_tag": null,
+  "garbage_collection": {
+    "fullsweep_after": 65535,
+    "max_heap_size": 0,
+    "min_bin_vheap_size": 46422,
+    "min_heap_size": 233,
+    "minor_gcs": 4
+  },
+  "head_message_timestamp": null,
+  "idle_since": "2019-04-26 17:52:25",
+  "memory": 19728,
+  "message_bytes": 0,
+  "message_bytes_paged_out": 0,
+  "message_bytes_persistent": 0,
+  "message_bytes_ram": 0,
+  "message_bytes_ready": 0,
+  "message_bytes_unacknowledged": 0,
+  "message_stats": {
+    "ack": 0,
+    "ack_details": {
+      "rate": 0
+    },
+    "deliver": 0,
+    "deliver_details": {
+      "rate": 0
+    },
+    "deliver_get": 1,
+    "deliver_get_details": {
+      "rate": 0
+    },
+    "deliver_no_ack": 0,
+    "deliver_no_ack_details": {
+      "rate": 0
+    },
+    "get": 1,
+    "get_details": {
+      "rate": 0
+    },
+    "get_no_ack": 0,
+    "get_no_ack_details": {
+      "rate": 0
+    },
+    "publish": 24,
+    "publish_details": {
+      "rate": 0
+    },
+    "redeliver": 0,
+    "redeliver_details": {
+      "rate": 0
+    }
+  },
+  "messages": 0,
+  "messages_details": {
+    "rate": 0
+  },
+  "messages_paged_out": 0,
+  "messages_persistent": 0,
+  "messages_ram": 0,
+  "messages_ready": 0,
+  "messages_ready_details": {
+    "rate": 0
+  },
+  "messages_ready_ram": 0,
+  "messages_unacknowledged": 0,
+  "messages_unacknowledged_details": {
+    "rate": 0
+  },
+  "messages_unacknowledged_ram": 0,
+  "name": "pepe.trigger.teste123",
+  "node": "rabbit@pepe-bus-9141-20190418152635",
+  "operator_policy": null,
+  "policy": "ha",
+  "recoverable_slaves": [],
+  "reductions": 305465,
+  "reductions_details": {
+    "rate": 0
+  },
+  "slave_nodes": [],
+  "state": "running",
+  "synchronised_slave_nodes": [],
+  "vhost": "/"
+}]

@@ -8,4 +8,8 @@ pepe:
     tags: default
 
 amqp:
-  url: amqp://guest:guest@127.0.0.1
+  url: 'amqp://guest:guest@127.0.0.1'
+  management:
+    url: 'http://127.0.0.1:15672'
+    login: 'guest'
+    password: 'guest'

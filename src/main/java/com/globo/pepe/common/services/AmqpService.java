@@ -16,23 +16,32 @@
 
 package com.globo.pepe.common.services;
 
+import com.rabbitmq.http.client.Client;
+import com.rabbitmq.http.client.domain.QueueInfo;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Component
 public class AmqpService {
+
+    @Value("${amqp.management.url}") String managementUrl;
+    @Value("${amqp.management.login}") String managementLogin;
+    @Value("${amqp.management.password}") String managementPassword;
 
     private final RabbitTemplate template;
     private final RabbitAdmin admin;
@@ -42,12 +51,19 @@ public class AmqpService {
     private final Map<String, List<MessageListener>> messageListeners = new HashMap<>();
     private final JsonLoggerService jsonLoggerService;
 
-    public AmqpService(ConnectionFactory connectionFactory, RabbitTemplate template, RabbitAdmin admin,
-        JsonLoggerService jsonLoggerService) {
+    private Client client = null;
+
+    public AmqpService(
+        ConnectionFactory connectionFactory,
+        RabbitTemplate template,
+        RabbitAdmin admin,
+        JsonLoggerService jsonLoggerService) throws MalformedURLException, URISyntaxException {
+
         this.connectionFactory = connectionFactory;
         this.template = template;
         this.admin = admin;
         this.jsonLoggerService = jsonLoggerService;
+//        this.managementClient = new Client("http://127.0.0.1:15672", "guest", "guest");
     }
 
     public boolean hasQueue(String queue) {
@@ -134,8 +150,16 @@ public class AmqpService {
         messageListeners.put(queueName, listOfMessageListener);
     }
 
-    public Set<String> queuesFromRabbit(String prefix) {
-        // TODO: Get from RabbitAdmin
+    public Set<QueueInfo> queuesFromRabbit(String prefix) {
+        try {
+            if (this.client == null) {
+                this.client = new Client(managementUrl, managementLogin, managementPassword);
+            }
+            final List<QueueInfo> queues = client.getQueues();
+            return queues.stream().filter(q -> q.getName().startsWith(prefix)).collect(Collectors.toSet());
+        } catch (MalformedURLException | URISyntaxException e) {
+            jsonLoggerService.newLogger(getClass()).message(e.getMessage()).sendError(e);
+        }
         return Collections.emptySet();
     }
 

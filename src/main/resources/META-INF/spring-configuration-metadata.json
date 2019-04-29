@@ -6,6 +6,21 @@
       "description": "amqp.url"
     },
     {
+      "name": "amqp.management.url",
+      "type": "java.lang.String",
+      "description": "amqp.management.url"
+    },
+    {
+      "name": "amqp.management.login",
+      "type": "java.lang.String",
+      "description": "amqp.management.login"
+    },
+    {
+      "name": "amqp.management.password",
+      "type": "java.lang.String",
+      "description": "amqp.management.password"
+    },
+    {
       "name": "build.project",
       "type": "java.lang.String",
       "description": "Maven build.project."
