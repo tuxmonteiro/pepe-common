@@ -157,7 +157,7 @@ public class AmqpService {
             }
             final List<QueueInfo> queues = client.getQueues();
             return queues.stream().filter(q -> q.getName().startsWith(prefix)).collect(Collectors.toSet());
-        } catch (MalformedURLException | URISyntaxException e) {
+        } catch (Exception e) {
             jsonLoggerService.newLogger(getClass()).message(e.getMessage()).sendError(e);
         }
         return Collections.emptySet();
