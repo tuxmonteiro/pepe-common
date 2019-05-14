@@ -33,6 +33,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +49,7 @@ public class AmqpService {
     private final ConnectionFactory connectionFactory;
 
     private final Map<String, SimpleMessageListenerContainer> messageListenerContainerMap = new HashMap<>();
-    private final Map<String, List<MessageListener>> messageListeners = new HashMap<>();
+    private final Map<String, List<ChannelAwareMessageListener>> messageListeners = new HashMap<>();
     private final JsonLoggerService jsonLoggerService;
 
     private Client client = null;
@@ -105,15 +106,15 @@ public class AmqpService {
         return admin.declareQueue(queue) != null;
     }
 
-    private MessageListener messageListener(String queueName) {
-        return message -> {
+    private ChannelAwareMessageListener messageListener(String queueName) {
+        return (message, channel) -> {
             if (messageListeners.get(queueName).isEmpty()) {
                 jsonLoggerService.newLogger(getClass())
                     .put("message", "Discarding queue message: " + message + ". Queue " + queueName + " dont have listeners registered.")
                     .sendWarn();
             }
-            for (MessageListener messageListener: messageListeners.get(queueName)) {
-                messageListener.onMessage(message);
+            for (ChannelAwareMessageListener messageListener: messageListeners.get(queueName)) {
+                messageListener.onMessage(message, channel);
             }
         };
     }
@@ -140,12 +141,12 @@ public class AmqpService {
         }
     }
 
-    public void registerListener(String queueName, MessageListener newMessageListener) {
+    public void registerListener(String queueName, ChannelAwareMessageListener newMessageListener) {
         if (messageListeners.get(queueName).isEmpty()) {
             final SimpleMessageListenerContainer container = messageListenerContainerMap.get(queueName);
             container.setMessageListener(messageListener(queueName));
         }
-        final List<MessageListener> listOfMessageListener = messageListeners.get(queueName);
+        final List<ChannelAwareMessageListener> listOfMessageListener = messageListeners.get(queueName);
         listOfMessageListener.add(newMessageListener);
         messageListeners.put(queueName, listOfMessageListener);
     }
