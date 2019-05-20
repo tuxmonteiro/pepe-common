@@ -17,21 +17,26 @@
 package com.globo.pepe.common.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 public class Event {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
-    private Metadata metadata;
-    private JsonNode payload;
+    static final JsonNode EMPTY_JSON = JsonNodeFactory.instance.objectNode();
+
+    private String id = "";
+
+    private Metadata metadata = new Metadata();
+
+    private JsonNode payload = EMPTY_JSON;
 
     public String getId() {
         return id;
     }
 
     public Event setId(String id) {
-        this.id = id;
+        this.id = id != null ? id : "";
         return this;
     }
 
@@ -40,7 +45,7 @@ public class Event {
     }
 
     public Event setMetadata(Metadata metadata) {
-        this.metadata = metadata;
+        this.metadata = metadata != null ? metadata : new Metadata();
         return this;
     }
 
@@ -49,7 +54,7 @@ public class Event {
     }
 
     public Event setPayload(JsonNode payload) {
-        this.payload = payload;
+        this.payload = payload != null ? payload : EMPTY_JSON;
         return this;
     }
 }

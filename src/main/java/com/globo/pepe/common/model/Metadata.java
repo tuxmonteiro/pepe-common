@@ -35,7 +35,7 @@ public class Metadata {
     private String triggerName;
 
     @JsonProperty("custom_attributes")
-    private JsonNode customAttributes;
+    private JsonNode customAttributes = Event.EMPTY_JSON;
 
     public String getSource() {
         return source;
@@ -87,7 +87,7 @@ public class Metadata {
     }
 
     public Metadata setCustomAttributes(JsonNode customAttributes) {
-        this.customAttributes = customAttributes;
+        this.customAttributes = customAttributes != null ? customAttributes : Event.EMPTY_JSON;
         return this;
     }
 }
