@@ -18,16 +18,7 @@ package com.globo.pepe.common.services;
 
 import com.rabbitmq.http.client.Client;
 import com.rabbitmq.http.client.domain.QueueInfo;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import org.springframework.amqp.core.MessageListener;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -36,6 +27,14 @@ import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class AmqpService {
@@ -58,13 +57,12 @@ public class AmqpService {
         ConnectionFactory connectionFactory,
         RabbitTemplate template,
         RabbitAdmin admin,
-        JsonLoggerService jsonLoggerService) throws MalformedURLException, URISyntaxException {
+        JsonLoggerService jsonLoggerService) {
 
         this.connectionFactory = connectionFactory;
         this.template = template;
         this.admin = admin;
         this.jsonLoggerService = jsonLoggerService;
-//        this.managementClient = new Client("http://127.0.0.1:15672", "guest", "guest");
     }
 
     public boolean hasQueue(String queue) {
@@ -125,6 +123,7 @@ public class AmqpService {
         container.addQueueNames(queueName);
         container.setAutoStartup(true);
         container.setAmqpAdmin(admin);
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         container.initialize();
         container.start();
         messageListenerContainerMap.put(queueName, container);
