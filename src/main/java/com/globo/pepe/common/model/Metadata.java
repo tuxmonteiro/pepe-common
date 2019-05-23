@@ -27,8 +27,6 @@ public class Metadata {
 
     private String project;
 
-    private String token;
-
     private Long timestamp;
 
     @JsonProperty("trigger_name")
@@ -52,15 +50,6 @@ public class Metadata {
 
     public Metadata setProject(String project) {
         this.project = project;
-        return this;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public Metadata setToken(String token) {
-        this.token = token;
         return this;
     }
 
