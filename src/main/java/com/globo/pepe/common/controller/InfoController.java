@@ -11,8 +11,11 @@ import java.io.IOException;
 @RestController
 public class InfoController {
 
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode node = mapper.createObjectNode();
+    private ObjectMapper mapper;
+
+    public InfoController(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Value("${build.project}")
     private String buildProject;
