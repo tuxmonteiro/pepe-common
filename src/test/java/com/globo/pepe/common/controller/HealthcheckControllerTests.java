@@ -1,7 +1,6 @@
-package com.globo.pepe.api.controller;
+package com.globo.pepe.common.controller;
 
 
-import com.globo.pepe.common.controller.HealthcheckController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

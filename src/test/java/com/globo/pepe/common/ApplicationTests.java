@@ -1,6 +1,5 @@
-package com.globo.pepe.api;
+package com.globo.pepe.common;
 
-import com.globo.pepe.common.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,13 +1,11 @@
-package com.globo.pepe.api.services;
+package com.globo.pepe.common.services;
 
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.globo.pepe.api.mocks.AmqpMockConfiguration;
-import com.globo.pepe.common.services.AmqpService;
-import com.globo.pepe.common.services.JsonLoggerService;
+import com.globo.pepe.common.mocks.AmqpMockConfiguration;
 import com.rabbitmq.http.client.domain.QueueInfo;
 import java.io.IOException;
 import java.io.InputStream;

@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.globo.pepe.api.util;
+package com.globo.pepe.common.util;
 
-import com.globo.pepe.common.util.ComplianceChecker;
 import org.junit.Test;
 
 public class ComplianceCheckerTests {

@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.globo.pepe.api.configuration;
+package com.globo.pepe.common.configuration;
 
 import com.github.fridujo.rabbitmq.mock.MockConnectionFactory;
-import com.globo.pepe.common.configuration.AmqpConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

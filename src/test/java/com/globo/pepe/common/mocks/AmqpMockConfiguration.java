@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.globo.pepe.api.mocks;
+package com.globo.pepe.common.mocks;
 
 import com.github.fridujo.rabbitmq.mock.compatibility.MockConnectionFactoryFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
