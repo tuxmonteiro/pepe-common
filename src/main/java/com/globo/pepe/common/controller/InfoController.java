@@ -11,7 +11,7 @@ import java.io.IOException;
 @RestController
 public class InfoController {
 
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     public InfoController(ObjectMapper mapper) {
         this.mapper = mapper;

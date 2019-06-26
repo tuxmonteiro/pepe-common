@@ -49,7 +49,7 @@ public class JsonLoggerService {
         private final Logger logger;
         private final ObjectNode node = mapper.createObjectNode();
 
-        public JsonLogger(final Class<?> klazz) {
+        JsonLogger(final Class<?> klazz) {
             this.logger = LogManager.getLogger(klazz);
             node.put("class", klazz.getSimpleName());
             String hostname;
