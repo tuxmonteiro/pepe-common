@@ -9,7 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @TestPropertySource(properties = {
-    "pepe.logging.tags=default"
+    "pepe.logging.tags=default",
+    "cors.allowed-origins=http://localhost",
+    "cors.allowed-methods=GET,POST,DELETE,PATCH,PUT,HEAD,OPTIONS,TRACE,CONNECT"
 })
 public class ApplicationTests {
 
