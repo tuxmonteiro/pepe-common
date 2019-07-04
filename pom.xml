@@ -54,6 +54,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>8</java.version>
         <timestamp>${maven.build.timestamp}</timestamp>
+
+        <httpcomponents-httpclient.version>4.5.8</httpcomponents-httpclient.version>
+        <jackson-databind.version>[2.9.9,)</jackson-databind.version>
+        <lmax-disruptor.version>3.4.2</lmax-disruptor.version>
+        <rabbitmq-http-client.version>3.2.0.RELEASE</rabbitmq-http-client.version>
+        <spring-rabbit.version>2.1.5.RELEASE</spring-rabbit.version>
     </properties>
 
     <dependencies>
@@ -90,27 +96,27 @@
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit</artifactId>
-            <version>2.1.5.RELEASE</version>
+            <version>${spring-rabbit.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.4.2</version>
+            <version>${lmax-disruptor.version}</version>
         </dependency>
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>http-client</artifactId>
-            <version>3.2.0.RELEASE</version>
+            <version>${rabbitmq-http-client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.8</version>
+            <version>${httpcomponents-httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>[2.9.9,)</version>
+            <version>${jackson-databind.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -173,8 +179,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>10</source>
-                    <target>10</target>
+                    <source>8</source>
+                    <target>8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
