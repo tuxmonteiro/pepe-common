@@ -19,15 +19,17 @@
 
 package com.globo.pepe.common.model.munin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.util.Assert;
 
 @Entity
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 public class Connection extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +79,6 @@ public class Connection extends AbstractEntity {
         return this;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
