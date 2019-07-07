@@ -19,15 +19,18 @@
 
 package com.globo.pepe.common.model.munin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 public class Keystone {
 
     private static final long serialVersionUID = 1L;
 
     private String login;
+
     private String password;
 
     public String getLogin() {
@@ -39,7 +42,6 @@ public class Keystone {
         return this;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
