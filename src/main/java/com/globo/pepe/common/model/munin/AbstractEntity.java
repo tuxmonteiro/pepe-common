@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.globo.pepe.common.annotation.JsonCustomProperties;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -64,25 +65,25 @@ public class AbstractEntity implements Persistable<Long>, Serializable {
     @Column(nullable = false, updatable = false)
     @JsonProperty("_created_by")
     @ColumnDefault("anonymous")
-    private String createdBy;
+    private String createdBy = "anonymous";
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
     @JsonProperty("_created_at")
     @ColumnDefault("CURRENT_TIMESTAMP")
-    private Date createdAt;
+    private Date createdAt = Date.from(Instant.now());
 
     @LastModifiedBy
     @Column(nullable = false)
     @JsonProperty("_last_modified_by")
     @ColumnDefault("anonymous")
-    private String lastModifiedBy;
+    private String lastModifiedBy = "anonymous";
 
     @LastModifiedDate
     @Column(nullable = false)
     @JsonProperty("_last_modified_at")
     @ColumnDefault("CURRENT_TIMESTAMP")
-    private Date lastModifiedAt;
+    private Date lastModifiedAt = Date.from(Instant.now());
 
     public AbstractEntity() {
     }
