@@ -32,6 +32,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -62,21 +63,25 @@ public class AbstractEntity implements Persistable<Long>, Serializable {
     @CreatedBy
     @Column(nullable = false, updatable = false)
     @JsonProperty("_created_by")
+    @ColumnDefault("anonymous")
     private String createdBy;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
     @JsonProperty("_created_at")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     private Date createdAt;
 
     @LastModifiedBy
     @Column(nullable = false)
     @JsonProperty("_last_modified_by")
+    @ColumnDefault("anonymous")
     private String lastModifiedBy;
 
     @LastModifiedDate
     @Column(nullable = false)
     @JsonProperty("_last_modified_at")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     private Date lastModifiedAt;
 
     public AbstractEntity() {
