@@ -43,10 +43,13 @@ public class Driver extends AbstractEntity {
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Type type;
+    private Type type = Type.NOOP;
 
     @OneToMany(mappedBy = "driver")
     private Set<Connection> connections;
+
+    @Column(nullable = false, unique = true)
+    private String alias;
 
     public Driver() {
         super();
@@ -85,6 +88,15 @@ public class Driver extends AbstractEntity {
 
     public Driver setConnections(Set<Connection> connections) {
         this.connections = connections;
+        return this;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public Driver setAlias(String alias) {
+        this.alias = alias;
         return this;
     }
 }
