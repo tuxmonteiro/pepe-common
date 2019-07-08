@@ -20,12 +20,14 @@
 package com.globo.pepe.common.model.munin;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.globo.pepe.common.converter.PasswordConverter;
 import org.springframework.util.Assert;
 
 @Entity
@@ -41,6 +43,7 @@ public class Connection extends AbstractEntity {
     private String login;
 
     @Column
+    @Convert(converter = PasswordConverter.class)
     private String password;
 
     @ManyToOne

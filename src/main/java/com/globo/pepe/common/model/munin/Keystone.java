@@ -20,7 +20,9 @@
 package com.globo.pepe.common.model.munin;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.globo.pepe.common.converter.PasswordConverter;
 
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -31,6 +33,7 @@ public class Keystone {
 
     private String login;
 
+    @Convert(converter = PasswordConverter.class)
     private String password;
 
     public String getLogin() {
