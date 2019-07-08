@@ -22,6 +22,7 @@ package com.globo.pepe.common.model.munin;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.globo.pepe.common.converter.PasswordConverter;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 
@@ -31,8 +32,10 @@ public class Keystone {
 
     private static final long serialVersionUID = 1L;
 
+    @Column(name = "keystone_login")
     private String login;
 
+    @Column(name = "keystone_password")
     @Convert(converter = PasswordConverter.class)
     private String password;
 
