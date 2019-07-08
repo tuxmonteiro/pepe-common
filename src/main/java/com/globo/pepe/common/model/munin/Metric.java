@@ -42,6 +42,9 @@ public class Metric extends AbstractEntity {
     @JoinColumn(name = "project_id", nullable = false, foreignKey = @ForeignKey(name="FK_metric_project"))
     private Project project;
 
+    @Column(nullable = false, unique = true)
+    private String trigger;
+
     public Metric() {
         super();
     }
@@ -81,6 +84,15 @@ public class Metric extends AbstractEntity {
 
     public Metric setProject(Project project) {
         this.project = project;
+        return this;
+    }
+
+    public String getTrigger() {
+        return trigger;
+    }
+
+    public Metric setTrigger(String trigger) {
+        this.trigger = trigger;
         return this;
     }
 }
