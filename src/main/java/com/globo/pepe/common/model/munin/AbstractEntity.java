@@ -40,7 +40,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.util.ProxyUtils;
 import org.springframework.lang.Nullable;
@@ -148,7 +147,7 @@ public class AbstractEntity implements Persistable<Long>, Serializable {
         } else if (!this.getClass().equals(ProxyUtils.getUserClass(obj))) {
             return false;
         } else {
-            AbstractPersistable<?> that = (AbstractPersistable)obj;
+            Persistable<?> that = (Persistable<?>) obj;
             return null != id && id.equals(that.getId());
         }
     }
