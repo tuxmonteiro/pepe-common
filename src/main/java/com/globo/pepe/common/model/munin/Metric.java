@@ -53,10 +53,11 @@ public class Metric extends AbstractEntity {
     @JsonProperty("last_processing")
     private Date lastProcessing = new Date(0);
 
-    @Column(name = "interval")
+    @Column(name = "interval_time")
     @JsonProperty("interval")
     private Long interval = 30L;
 
+    @Column(name = "metric_enable")
     private Boolean enable = true;
 
     public Metric() {
