@@ -128,7 +128,7 @@ public class Metric extends AbstractEntity {
         return this;
     }
 
-    public Boolean getEnable() {
+    public Boolean isEnable() {
         return enable;
     }
 
