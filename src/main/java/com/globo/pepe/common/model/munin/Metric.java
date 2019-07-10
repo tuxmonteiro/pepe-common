@@ -53,9 +53,9 @@ public class Metric extends AbstractEntity {
     @JsonProperty("last_processing")
     private Date lastProcessing = new Date(0);
 
-    @Column(name = "rate_limit_secs")
-    @JsonProperty("rate_limit_secs")
-    private Long rateLimitSec = 30L;
+    @Column(name = "interval")
+    @JsonProperty("interval")
+    private Long interval = 30L;
 
     private Boolean enable = true;
 
@@ -119,12 +119,12 @@ public class Metric extends AbstractEntity {
         return this;
     }
 
-    public Long getRateLimitSec() {
-        return rateLimitSec;
+    public Long getInterval() {
+        return interval;
     }
 
-    public Metric setRateLimitSec(Long rateLimitSec) {
-        this.rateLimitSec = rateLimitSec;
+    public Metric setInterval(Long interval) {
+        this.interval = interval;
         return this;
     }
 
