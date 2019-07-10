@@ -19,6 +19,7 @@
 
 package com.globo.pepe.common.model.munin;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import javax.persistence.Column;
@@ -29,6 +30,7 @@ import javax.persistence.ManyToOne;
 import org.springframework.util.Assert;
 
 @Entity
+@JsonIgnoreProperties(value = {"last_processing"}, allowGetters = true)
 public class Metric extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
