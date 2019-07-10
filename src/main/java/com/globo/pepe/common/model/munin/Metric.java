@@ -19,6 +19,8 @@
 
 package com.globo.pepe.common.model.munin;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -44,6 +46,16 @@ public class Metric extends AbstractEntity {
 
     @Column(name = "trigger_name", nullable = false, unique = true)
     private String trigger;
+
+    @Column(name = "last_processing")
+    @JsonProperty("last_processing")
+    private Date lastProcessing = new Date(0);
+
+    @Column(name = "rate_limit_secs")
+    @JsonProperty("rate_limit_secs")
+    private Long rateLimitSec = 30L;
+
+    private Boolean enable = true;
 
     public Metric() {
         super();
@@ -93,6 +105,33 @@ public class Metric extends AbstractEntity {
 
     public Metric setTrigger(String trigger) {
         this.trigger = trigger;
+        return this;
+    }
+
+    public Date getLastProcessing() {
+        return lastProcessing;
+    }
+
+    public Metric setLastProcessing(Date lastProcessing) {
+        this.lastProcessing = lastProcessing;
+        return this;
+    }
+
+    public Long getRateLimitSec() {
+        return rateLimitSec;
+    }
+
+    public Metric setRateLimitSec(Long rateLimitSec) {
+        this.rateLimitSec = rateLimitSec;
+        return this;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public Metric setEnable(Boolean enable) {
+        this.enable = enable;
         return this;
     }
 }
