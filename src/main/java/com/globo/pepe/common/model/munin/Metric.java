@@ -129,7 +129,7 @@ public class Metric extends AbstractEntity {
         return this;
     }
 
-    public Boolean isEnable() {
+    public Boolean getEnable() {
         return enable;
     }
 
