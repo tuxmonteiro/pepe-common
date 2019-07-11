@@ -22,13 +22,14 @@ package com.globo.pepe.common.model.munin;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.globo.pepe.common.converter.PasswordConverter;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 
 @Embeddable
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
-public class Keystone {
+public class Keystone implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
