@@ -64,9 +64,7 @@ public class Keystone implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Keystone keystone = (Keystone) o;
-
         return Objects.equals(login, keystone.login) && Objects.equals(password, keystone.password);
     }
 
