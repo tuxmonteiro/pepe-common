@@ -26,6 +26,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.globo.pepe.common.converter.PasswordConverter;
 import org.springframework.util.Assert;
@@ -42,8 +43,8 @@ public class Connection extends AbstractEntity {
     @Column
     private String login;
 
+    @JsonIgnore
     @Column
-    @Convert(converter = PasswordConverter.class)
     private String password;
 
     @ManyToOne

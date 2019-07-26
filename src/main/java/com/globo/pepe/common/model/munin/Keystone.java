@@ -19,6 +19,7 @@
 
 package com.globo.pepe.common.model.munin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.globo.pepe.common.converter.PasswordConverter;
 
@@ -37,8 +38,8 @@ public class Keystone implements Serializable {
     @Column(name = "keystone_login")
     private String login;
 
+    @JsonIgnore
     @Column(name = "keystone_password")
-    @Convert(converter = PasswordConverter.class)
     private String password;
 
     public String getLogin() {
