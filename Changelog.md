@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+## [1.1.0] - 2019-07-26
+### Added
+- Fix Jackson Databind version 2.9.9
+
 ## [1.1.0] - 2019-07-01
 ### Added
 - JPA  Initial implementation for common entitys of project PEPE
