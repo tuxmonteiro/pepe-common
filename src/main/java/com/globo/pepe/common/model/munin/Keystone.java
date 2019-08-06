@@ -19,15 +19,15 @@
 
 package com.globo.pepe.common.model.munin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.globo.pepe.common.converter.PasswordConverter;
-
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Embeddable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Embeddable
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
@@ -38,7 +38,7 @@ public class Keystone implements Serializable {
     @Column(name = "keystone_login")
     private String login;
 
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "keystone_password")
     private String password;
 
