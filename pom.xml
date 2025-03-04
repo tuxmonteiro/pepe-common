@@ -55,11 +55,11 @@
         <java.version>8</java.version>
         <timestamp>${maven.build.timestamp}</timestamp>
 
-        <httpcomponents-httpclient.version>4.5.8</httpcomponents-httpclient.version>
-        <jackson-databind.version>2.9.9</jackson-databind.version>
+        <httpcomponents-httpclient.version>4.5.13</httpcomponents-httpclient.version>
+        <jackson-databind.version>2.15.0</jackson-databind.version>
         <lmax-disruptor.version>3.4.2</lmax-disruptor.version>
-        <rabbitmq-http-client.version>3.2.0.RELEASE</rabbitmq-http-client.version>
-        <spring-rabbit.version>2.1.5.RELEASE</spring-rabbit.version>
+        <rabbitmq-http-client.version>4.2.0</rabbitmq-http-client.version>
+        <spring-rabbit.version>3.1.8</spring-rabbit.version>
     </properties>
 
     <dependencies>
