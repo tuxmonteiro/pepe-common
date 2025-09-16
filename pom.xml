@@ -59,7 +59,7 @@
         <jackson-databind.version>2.19.2</jackson-databind.version>
         <lmax-disruptor.version>3.4.4</lmax-disruptor.version>
         <rabbitmq-http-client.version>4.2.0</rabbitmq-http-client.version>
-        <spring-rabbit.version>3.2.6</spring-rabbit.version>
+        <spring-rabbit.version>3.2.7</spring-rabbit.version>
     </properties>
 
     <dependencies>
